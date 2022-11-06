@@ -38,8 +38,7 @@ across countries, the following tasks will be performed -
 1. The dataset and its 
 documentation will be numerically explored to deduce coding criteria for responses, and nonresponses.
 2. It will be wrangled for graphical and numerical analyses. The large
-dataset will need to be subset, reverse scoring will be applied, disparate coding for nonresponses in each variable of interest will be uniformly replaced with “NA” for analysis of
-missing data. A deep analysis of missing data will be conducted. 
+dataset will need to be subset, reverse scoring will be applied, and a deep analysis of missing data will be conducted. 
 3. Thirdly, a multinomial,
 ordered logistic regression analysis will be conducted to account for the ordered, categorical nature
 of measurements. 
