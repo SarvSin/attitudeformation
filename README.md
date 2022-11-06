@@ -17,6 +17,8 @@ Affective information encompasses impressions or feelings linked to an object, c
 information includes the convictions, and beliefs associated with an object, and behavioural
 information accounts for past encounters with an object.
 
+<img width="829" alt="Screenshot 2022-11-06 at 22 06 16" src="https://user-images.githubusercontent.com/117599272/200197854-534dca44-a9b7-44af-9281-e4df6f4792ee.png">
+
 Much research has been conducted on the links between negative or positive attitudes
 towards immigration, and socio-economic trends on both macro- and micro-levels. However,
 this analysis focuses on exploring specific psychological influences of attitude-formation
@@ -47,3 +49,5 @@ models will be tested against a null hypothesis of no change on a chi-squared di
 5. Hierarchical modelling will be justified in response to intermediate results obtained
 during analysis, and performed to account for the effects of clustering and stratification in
 data. 
+
+<img width="870" alt="Screenshot 2022-11-06 at 22 07 02" src="https://user-images.githubusercontent.com/117599272/200197886-b9980956-7553-4fd2-b2c0-f25175fe2ecf.png">
