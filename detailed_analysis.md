@@ -1,0 +1,346 @@
+# Statistical Analysis
+
+## Data
+
+Data analysed for this report was obtained from the latest round of The European Social
+Survey. The ESS is a unique value-based, inter-national survey designed to facilitate an
+understanding of attitudes and behaviour in the European region. It was awarded the
+European Research Infrastructure Consortium status in 2013, and the data used in this
+analysis was collected in 2018. The survey is conducted biennially, completely via face-toface interviewing. Strict guidelines for sampling, data collection, questionnaire design, and
+translation have ensured that data is comparable across participating countries and is of a
+high-quality. Data for 2020-2021 survey have not been released yet.
+
+The data was weighted to attribute unequal sample selection probabilities within each country
+as specified by design, non-response, and sampling errors related to the post-stratification
+variables, and has accounted for the differences in population size across countries.
+The dataset contains 49519 observations across 572 variables. Attention needed to be
+restricted to a subset of variables suitable for the analysis. To keep the analysis
+straightforward, one variable each was chosen for the response, and its predictors. Insights
+gained from major immigration studies allowed a scientific assignment of variables to
+measure the strength and valence of the response variable “attitude”, and the predictor
+variables - affective, cognitive, and behavioural information.
+
+The types of variables being
+studied are ordered, categorical
+variables. Such variables are
+measured on an ordinal scale,
+where although an ordering exists,
+distances between scale positions
+are not equal. This renders their
+treatment as discrete quantitative
+variables meaningless. Hence,
+methods of ordered logistic
+regression needed to be applied to
+analyse the data. Major treatments
+made to this data include reverse-scoring the measure for affective information since it was
+formulated negatively, and re-coding all responses of the kind “Refusal”, “Don’t know”, and
+“No answer” as missing, or NA. 
+
+<img width="620" alt="Screenshot 2022-11-06 at 22 22 09" src="https://user-images.githubusercontent.com/117599272/200198840-6bb38111-f91c-486e-9ee7-6d9a6df0d476.png">
+
+
+In addition, catering to the objective of analysis,
+observations from immigrants and members of ethnic minorities were excluded. This was
+done to ensure a representative
+reflection of native attitudes
+towards non-native immigrants and
+members of the population.
+
+After this step, relative size of
+missing data in relation to complete
+data was computed, and the
+mechanisms of missing data were
+explored meticulously. For each
+variable of interest, responses recoded as missing were found to
+constitute less than 5% of the total
+data. Details regarding
+determination of missing data mechanism are given in the results section. A random imputed
+dataset was ultimately used, the decision supported by following findings - limited amount of
+missing data, judgement of the missing data to be of type MCAR (details in results section),
+large size of the “complete” dataset (>30000), and unsignificant improvements brought by a
+MICE-imputed dataset to modelling (details in results section).
+For conducting a spatial analysis of attitudes across Europe, a dataset containing geographical
+coordinates was obtained from Statista. This was then merged with the main dataset and
+plotted. Doing so required specifying and extracting columns of interest, re-naming them, and
+merging to form a new data frame.
+
+<img width="590" alt="Screenshot 2022-11-06 at 22 22 35" src="https://user-images.githubusercontent.com/117599272/200198871-62746ac0-cdb1-4228-b9be-3bc0246795d9.png">
+
+## Results
+
+To begin with, it was decided that
+responses of the kind “Refusal”,
+“Don’t know”, and “No answer” will
+be regarded as missing data. After
+labelling all such responses as “NA”, it
+remained to be assessed whether the
+missing data was to be categorised as
+MCAR, MAR, or MNAR. To visually
+analyse the missing data, a package
+called VIM was installed. If the data
+was found to be MCAR, it could be
+removed without creating bias in estimates obtained from analyses. However, if the data was
+MAR, it would need to be imputed. In addition to the mechanism, the proportion of missing
+data was considered as well. Firstly, margin plots were created to judge if the missing data
+was MAR or MCAR.
+
+<img width="596" alt="Screenshot 2022-11-06 at 22 22 55" src="https://user-images.githubusercontent.com/117599272/200198857-45e9d80b-c163-4e56-b302-3ff0b933d49c.png">
+
+As illustrated in Figures 1 and 2, the red and blue box plots on each of the horizontal and
+vertical axes were found to be exactly same, or similar for all combinations of the predictor
+variables – the affective, cognitive, and behavioural information. This indicated that the
+Figure 2: Affective VS cognitive missing data (scale: least to most negative)
+ Figure 3: Spine plot for behavioural information (x scale: least to most negative)
+4
+missing values in one were not related to missing values in another variable. Hence, the MAR
+assumption that missingness in one variable can be explained by missingness in another, was
+violated. Secondly, spine plots were created to study the percentage of missing values within
+each category against the response variable “attitude”. Please refer to Figures 3 and 4.
+
+The width of bars reflects relative
+frequency of observations in each
+level within a category. Spine plots for
+affective, cognitive, and behavioural
+information all indicated that the
+missing data is not distributed
+according to a strong trend. In
+addition, the proportion of missing
+data in each category was found to be
+limited. This supported a conclusion
+that the missing data is MCAR, and of
+a negligible size. To confirm, a MICE
+imputation using the method “logit”
+was carried out on the categorical data. Following this, a simple logistic regression was
+carried out using pooled imputed data. 
+
+<img width="596" alt="Screenshot 2022-11-06 at 22 22 55" src="https://user-images.githubusercontent.com/117599272/200198914-0f4fa277-d4ba-40dc-87eb-7a74ef4f84fd.png">
+
+On the other hand, a complete dataset that was
+obtained post list-wise deletion. A comparison of the coefficients only revealed
+insignificantly small changes to size of standard errors for coefficients. Hence, the remaining
+analysis was conducted on a randomly chosen MICE-imputed dataset.
+As part of the initial examination of data, explanatory and response variables were identified
+and summarised in a numerical summary. The number of levels in response variable
+“attitude” range from 1 to 4, coded as going from least to most negative. Explanatory variable
+“Affective information” ranges from 0 to 10, “behavioural information” ranges from 1 to 6,
+and “cognitive information” ranges from 0 to 10, all coded in order from least negative to
+most negative. Figure 5 shows that there exists a linear relationship between attitudes towards
+immigration and affective information, i.e., positive feelings correspond with positive
+attitudes towards immigration, and negative feelings with negative attitudes. There exists a
+weaker linear correspondence with cognitive and behavioural information and attitudes
+towards immigration. See Figure 6. It should also be noted that this relationship need not be
+causal.
+
+<img width="1074" alt="Screenshot 2022-11-06 at 22 23 44" src="https://user-images.githubusercontent.com/117599272/200198939-5e268502-c8ee-4e08-936a-73df445477d7.png">
+
+
+Figure 5: Affective influence and attitude relationship (scale: least to most negative) Figure 6: Cognitive information and attitude relationship
+5
+
+Next, research was conducted to find packages and libraries available for performing ordered
+logistic regressions. A package called MASS was required, and the function “polr” was
+utilised to execute a cumulative, proportional-odds logistic regression. Firstly, three simple
+models with “attitude” as the response variable and “affective information”, “cognitive
+information”, and “behavioural information” as the explanatory variables were fit and
+plotted. The relationships between the levels within each explanatory variable, and the levels
+within the response variable was analysed. The plots in Figures 7-9 illustrate the discussion
+that follows. In the plots, predicted probabilities for each level were obtained from the logordered ratios, and fitted against a scale of non-cumulative probabilities.
+Figure 7 indicated
+that lower values,
+or more positive
+feelings suggested
+high probability
+for possessing a
+positive attitude
+towards
+immigration, or a
+lower level in
+“attitude”. 
+
+<img width="829" alt="Screenshot 2022-11-06 at 22 06 16" src="https://user-images.githubusercontent.com/117599272/200198997-92480207-0e49-4f03-94a4-78acfe0fc921.png">
+
+
+This
+relationship was
+observed to be
+same, but weaker
+for cognitive and
+behavioural
+information. In
+Figures 8 and 9 it
+was noticed that
+ambiguous attitudes coded by
+levels 2 and 3 were influenced similarly by cognitive and behavioural information ranging
+from most positive to most negative. This suggested a cognitive dissonance in the
+respondents.
+
+Because the linear relationship
+appeared to be most significant
+between affective information and
+attitudes, the simple logistic model
+with “attitude” and “affective
+information” as the response
+variable, and explanatory variables
+respectively, was chosen to be the
+base model. Against this, the
+significance of cognitive
+information was compared, against
+which the significance of a complete
+model consisting of all three
+attitude-influencers was compared
+using a log-likelihood test.
+
+<img width="672" alt="Screenshot 2022-11-06 at 22 24 48" src="https://user-images.githubusercontent.com/117599272/200199013-47922c3e-303b-4b70-b328-93b3677ecd43.png">
+
+<img width="771" alt="Screenshot 2022-11-06 at 22 25 08" src="https://user-images.githubusercontent.com/117599272/200199016-59c8d675-0a87-4921-9082-9eda3e55787e.png">
+Figure 7: Affective information and attitude levels (x scale: least to most negative)
+Figure 8: Behavioural information and attitude levels (x scale: least to most negative)
+
+Differences in deviance, calculated as -2 * Log-likelihood, are distributed according to the
+chi-squared distribution, which enabled an easy comparison of model fit. It made sense to
+also compare models against their AIC (Akaike Information Criterion) values as they are
+modelled on the same data. In addition, although hypothesis tests cannot be conducted on
+AIC values, these values penalise models for higher number of parameters which is useful
+especially in assessing fit of complex interaction models. As illustrated in the table in Figure
+10, the null hypothesis of no improvement was rejected after finding that the fit that included
+all components of attitude-formation was significantly better than the other models, and
+hence was chosen to be explored further.
+The coefficients for affective information were significantly different from zero, suggesting a
+valid influence on attitudes towards immigration (See: Figure 11). Furthermore, the
+coefficients were found to be positive, and increasing. It was noted, firstly, that the models
+ Figure 9: Cognitive information and attitude levels (x scale: least to most negative)
+ 
+ <img width="1077" alt="Screenshot 2022-11-06 at 22 25 29" src="https://user-images.githubusercontent.com/117599272/200199064-ba12f572-940c-4b67-9130-56cc07c085b6.png">
+ Figure 10: ANOVA table for building and comparing model fits
+ 
+ 
+fitted were cumulative logistic regressions, and secondly that for the “polr” function, R
+returned negative transformations of coefficients, hence the trend could be interpreted as such
+– probability of possessing a positive attitude towards immigration, decreases as affective
+influence turns increasingly negative. The same trend of increasing coefficients was observed
+for both cognitive and behavioural information, and a similar interpretation applies.
+Cognitive1, 2, and 3 are the only effects that were found to span across 0, and hence appear
+to be unsignificant.
+
+
+<img width="349" alt="Screenshot 2022-11-06 at 22 26 08" src="https://user-images.githubusercontent.com/117599272/200199097-7d120c95-2b15-49bd-8b2d-846c23e57e06.png">
+Figure 11: Coefficients and confidence intervals of multicomponent model of attitude
+: Coefficients and confidence intervals for multicomponent model of attitude
+
+
+<img width="387" alt="Screenshot 2022-11-06 at 22 26 31" src="https://user-images.githubusercontent.com/117599272/200199178-a9447bf5-c872-4c57-a6c1-ff9e489ca4f3.png">
+
+ Figure 12: Map of aggregated attitude levels across Europe (legend: least to most negative)
+A spatial mapping of aggregated attitudes towards immigration across the European countries
+indicated variation in attitudes toward immigration (See: Figure 12). It was supported by a
+proportional effects plot (Figure 14), that illustrated the differing proportion of attitude levels
+across the countries included in this analysis. This suggested that clustering effects due to
+membership of different countries existed, and that individual observations in the dataset
+were not independent of each other, as assumed previously. To examine and verify this result,
+the “country” variable was added to the ordinal logistic regression. Since “country” was a
+nominal categorical variable, R treated each country within this variable as a dummy
+variable. After conducting another log-likelihood test (See: Figure 13 for table) to compare
+the previous model with the latest one including “country”, the null hypothesis of no
+improvement was rejected, and country effects found significant for fit.
+ 
+ 
+ 
+ <img width="515" alt="Screenshot 2022-11-06 at 22 26 50" src="https://user-images.githubusercontent.com/117599272/200199190-ccb64059-5543-4334-ad29-05583862c948.png">
+
+ Figure 13: ANOVA table for testing country effects
+
+<img width="492" alt="Screenshot 2022-11-06 at 22 27 08" src="https://user-images.githubusercontent.com/117599272/200199199-0dab768d-6b70-47d8-99b9-4a8235b755fc.png">
+Figure 14: Proportional distribution of attitude levels across Europe
+
+However, multiple drawbacks were found in fitting a fixed effects model when the number of
+groups (countries, in this case) was large. With more than 25 countries in consideration, a
+substantial number of coefficients had to be estimated. For countries with small sample sizes,
+the standard errors for coefficient estimates were also found to be higher. In addition, the
+target inference population of this analysis was not limited to native residents of European
+countries. It was to be examined how influence of the multicomponent model of attitude
+shifted across countries in general, extending the limit of inferences beyond the clusters
+included in the sample.
+This implied that the countries included in this analysis had been picked from a statistical
+“superpopulation”, and that it was justified to fit a mixed effects model. A package called
+“ordinal” was installed to perform hierarchical, ordinal logistic regression. A random
+intercept model with “country” as the level 2, or contextual variable was fit to account for
+clustering effects. Figure 15 illustrates the ordered, group effects of countries. The Bayesian
+posterior mode of each country’s random distribution is accompanied by a 95% confidence
+interval. Both the mode and variance were estimated conditionally, i.e., given the estimated
+model parameters, and observed data.
+
+Comparing the results from Figures 12 and 14, the high proportion of negative attitude
+towards immigration in countries like Slovakia (SK), Czechia (CZ), Bulgaria (BG), and
+Poland (PL), was explained by a systematic group effect as computed via the random effects
+model. Countries below the average group effect can be interpreted to have a more positive
+attitude towards immigration – this includes Sweden (SE), Norway (NO), Germany (DE),
+and Great Britain (GB). 
+
+<img width="465" alt="Screenshot 2022-11-06 at 22 27 30" src="https://user-images.githubusercontent.com/117599272/200199212-54798914-1d9f-4351-a87b-b4dc84cc9192.png">
+
+ Figure 15: Country-wise distribution modes and confidence intervals
+To summarise, and using the final random-effects model for attitudes towards immigration,
+stacked plots were created for each component of attitude-formation. Accounting for
+clustering or group effects encapsulated by the “country” variable had increased the standard
+errors of coefficients, however this was to be expected as they were previously
+underestimated. Thus, the coefficients and predicted probabilities obtained after fitting the
+mixed-effects model gave the most accurate, if not precise, indication of the affective,
+cognitive, and behavioural influences on attitude towards immigration. As is clear from
+Figures 16-17, affective information is the most revealing indicator of valence of attitudes.
+Stronger positive feelings towards immigration, for instance, increase the probability of
+having a positive attitude more than surer beliefs or more favourable experiences.
+
+<img width="522" alt="Screenshot 2022-11-06 at 22 27 47" src="https://user-images.githubusercontent.com/117599272/200199230-54e3b1ee-084c-4735-b2cd-009bfcd70812.png">
+
+Figure 16: Stacked plot for affective influence on
+attitude
+
+
+## Limitations
+
+With regards to the object of analysis, the data collection mechanism is the source of biggest
+limitation. Honest answers on sensitive topics like immigration are likelier to be obtained
+from self-administered questionnaires, than in the presence of an interviewer. Face-to-face
+interviews in this context increase the number of missing data. In a perfect world, true values
+and attitudes would be captured for all participants approached, thus giving a more
+representative look at population measures and relationships.
+Considering the dense, and complicated intercultural environment across Europe, nonhierarchical relationships of the taking the form of cross-classification, or multiplemembership structures could also be investigated. In addition, exploring whether
+relationships among affective, cognitive, and behavioural information differ across countries
+can also be worthwhile. This would require fitting complex random intercept and slope
+models on ordinal data. Although running such models, with random effects for all three
+information predictors included, would be extremely computation-intensive and timeconsuming, results from such an experiment could be insightful.
+Finally, the very data under consideration is meant to quantify psychological constructs
+which are notoriously complicated to measure. The quantifications need to be correlated with
+other measures of same construct, uncorrelated with measures of different constructs, and
+capable of predicting actions. A meticulous design of questionnaires, sampling, and data
+collection methods is required before embarking on a quest to conduct a value-based survey.
+Assessment of the same is necessary before performing analysis on such primary data, as is
+including weights to account for the issues detailed above.
+
+<img width="484" alt="Screenshot 2022-11-06 at 22 28 06" src="https://user-images.githubusercontent.com/117599272/200199252-988fbc84-1867-49bc-90b6-3781b1d9b4f4.png">
+Figure 17: Stacked plots for cognitive, and behavioural influence on attitude
+
+## Conclusion
+
+The quest to understand and shape people’s attitudes towards topics like immigration, and
+climate change has gripped the minds of politicians, activists, and media houses in the recent
+decades. The relative importance of affective versus cognitive information on moulding
+opinions has been of a special interest. Proponents of the former claim that intuitive feelings,
+and stereotypes play a bigger role in the formation of attitudes than thoughts and beliefs, and
+the outcome of this analysis supports this idea. 
+
+The aim was to understand the relative influence, and significance of affective, cognitive, and
+behavioural influences on attitude-formation towards immigration, and to test if cultural
+differences affected this model. It was found that affective information was most influential,
+and that cultural differences separated by geographical borders were highly significant.
+Immigration is not experienced in equal measure, or strength by everyone. It feels out of
+reach, lost in memory, or ubiquitous in varying colours. When personal experience is limited
+or diluted, attitudes are formed through connections with things associated with immigration,
+yet closer to home. Hence, superficial impressions, stereotypes, and ideological influences
+play a significant role in the formation of attitudes towards immigration.
+Appealing to emotions and underlying values is more powerful than presenting rational
+arguments, and personal stories more persuasive than evidence. It is not surprising that the
+images, narratives, and stories relayed about immigrants are straightforward, and either black
+or white.
+The data analysis conducted here acknowledges the effect of all, but gives clear weightage to
+Pathos over Ethos and Logos in Aristotle’s Trinity of Persuasion. 
