@@ -1,4 +1,4 @@
-# Influencing the public psyche
+# Influencing public attitude
 
 Encouragement or discouragement of public behaviours is key in both public and private
 spheres of economic activity, as well as in the functioning of a law-abiding, flourishing
